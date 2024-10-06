@@ -8,5 +8,6 @@ namespace TaskMasterBackend.Database
         {
 
         }
+        public DbSet<Task> Tasks { get; set;}
     }
 }
