@@ -1,6 +1,10 @@
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using TaskMasterBackend.Configuration;
+using TaskMasterBackend.Contracts;
 using TaskMasterBackend.Database;
+using TaskMasterBackend.Repositories;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +16,10 @@ builder.Services.AddDbContext<TaskManagerDbContext>(options =>
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddAutoMapper(typeof(MapperConfig));
+builder.Services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
+builder.Services.AddScoped<ITaskRepository, TaskRepository>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
