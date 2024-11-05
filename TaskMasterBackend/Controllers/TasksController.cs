@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Build.Framework;
@@ -105,6 +106,7 @@ namespace TaskMasterBackend.Controllers
 
         // DELETE: api/Tasks/5
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteTask(Guid id)
         {
             var task = await _taskRepository.GetAsync(id);
